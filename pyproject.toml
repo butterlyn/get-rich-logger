@@ -2,7 +2,7 @@
 name = "get-rich-logger"
 version = "0.1.0"
 description = ""
-authors = ["nbutterly <butterlyn888@gmail.com>"]
+authors = ["Nicholas Butterly <butterlyn888@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
