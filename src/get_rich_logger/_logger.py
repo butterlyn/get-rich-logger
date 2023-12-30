@@ -53,8 +53,9 @@ def getRichLogger(
 
     Example
     -------
+    ``` pycon
     >>> import logging
-    >>> from logger import getRichLogger
+    >>> from get_rich_logger import getRichLogger
     >>> getRichLogger(
             logging_level="DEBUG",
             logger_name=__name__,
@@ -64,6 +65,7 @@ def getRichLogger(
         )
     >>> logging.debug("This is a rich debug message!")
     >>> 1/0
+    ```
     """
 
     # install rich traceback for unhandled exceptions
