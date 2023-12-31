@@ -3,11 +3,20 @@ site_name: Get Rich Logger
 repo_url: https://github.com/butterlyn/get-rich-logger
 repo_name: butterlyn/get-rich-logger
 
+nav:
+  - Home:
+    - Welcome: index.md  # odd formatting to make this section the landing page
+    - '': sections/Home/
+  - Development: sections/Development/
+  - API Reference: reference/  # auto-generate api references (https://mkdocstrings.github.io/recipes/)
+  # - API Reference:
+  #   - get_rich_logger: reference/get_rich_logger/init.md  # generate specific pages
+
 theme:
   name: 'material'
   features:
     # - toc.integrate
-    # - navigation.sections
+    - navigation.sections
     - navigation.indexes
     - navigation.top
     - navigation.tabs
@@ -19,15 +28,6 @@ theme:
     - content.code.select
     - content.code.copy
     - content.tooltips
-
-nav:
-  - Home:
-    - Welcome: 'index.md'
-    - User Guide: 'sections/User Guide/'
-    - Development: sections/Development/
-  - API Reference: reference/  # auto-generate api references (https://mkdocstrings.github.io/recipes/)
-  # - API Reference:
-  #   - get_rich_logger: reference/get_rich_logger/init.md  # generate specific pages
 
 plugins:
   - search
