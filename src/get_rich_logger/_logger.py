@@ -88,9 +88,9 @@ def getRichLogger(
         import logging
         from get_rich_logger import getRichLogger
 
-        getRichLogger(
-            logging_level="DEBUG",
-            logger_name=__name__,
+        logger: logging.Logger = getRichLogger(
+            level="DEBUG",
+            name=__name__,
             traceback_show_locals=True,
             traceback_extra_lines=10,
             traceback_suppressed_modules=(),
@@ -139,23 +139,3 @@ def getRichLogger(
 
     # return the rich logger
     return logging.getLogger(name)
-
-
-# ~~~~~ example usage ~~~~~
-if __name__ == "__main__":
-    logger: logging.Logger = getRichLogger(
-        level="DEBUG",
-        name=__name__,
-    )
-
-    # # Gives rich traceback for unhandled errors
-    # 1/0
-
-    # Also gives rich traceback for handled exceptions
-    try:
-        1 / 0
-    except Exception as e:
-        logger.exception(
-            "This is an example rich logger error message for handled"
-            f"exception! Error: {e}"
-        )
