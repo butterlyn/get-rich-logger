@@ -1,42 +1,68 @@
-from typing import Iterable
+from typing import (
+    Iterable,
+    TypedDict,
+)
+from typing_extensions import Unpack
 from types import ModuleType
 import logging
+from logging.config import (  # type: ignore[attr-defined]
+    _Level,
+    _FormatStyle,
+)
 from rich.logging import RichHandler
 from rich import traceback
 
 
+class LoggingBasicConfigExtraKwargs(TypedDict, total=False):
+    """
+    Optional keyword argument taken from
+    [logging.getLogger()](https://docs.python.org/3/library/logging.html)
+    excluding `level`, `format`, and `handlers`, and `stream`.
+    """
+    filename: str | None
+    filemode: str
+    datefmt: str | None
+    style: _FormatStyle
+    force: bool | None
+    encoding: str | None
+    errors: str | None
+
+
 def getRichLogger(
-    logging_level: str | int = "NOTSET",
-    logger_name: str | None = None,
+    level: _Level = "NOTSET",
+    name: str | None = None,
     format: str = "%(message)s",
     traceback_show_locals: bool = False,
-    traceback_hide_dunder_locals: bool = True,
-    traceback_hide_sunder_locals: bool = True,
+    traceback_hide_dunder_sunder_locals: bool = True,
     traceback_extra_lines: int = 10,
     traceback_suppressed_modules: Iterable[ModuleType] = (),
+    **logging_basic_config_extra_kwargs: Unpack[LoggingBasicConfigExtraKwargs],
 ) -> logging.Logger:
     """
-    Substitute for [logging.getLogger()](https://docs.python.org/3/library/logging.html), but pre-configured as rich
-    logger with rich traceback.
+    Substitute for [logging.getLogger()](https://docs.python.org/3/library/logging.html),
+    but pre-configured as rich logger with rich traceback.
 
     Parameters
     ----------
-    logging_level : str or int, optional
+    level : _Level, optional
         The logging level to use.
-    logger_name : str, optional
-        The name of the logger.
+        Valid values include "DEBUG", 10, "INFO", 20, "WARNING", 30,
+        "ERROR", 40, "CRITICAL", 50.
+    name : str, optional
+        The name of the logger. Recommended to use `__name__`.
     format : str, optional
         The format string to use for the rich logger.
     traceback_show_locals : bool, optional
         Whether to show local variables in tracebacks.
-    traceback_hide_dunder_locals : bool, optional
-        Whether to hide dunder variables in tracebacks.
-    traceback_hide_sunder_locals : bool, optional
-        Whether to hide sunder variables in tracebacks.
+    traceback_hide_dunder_sunder_locals : bool, optional
+        Whether to hide dunder and sunder variables in tracebacks.
+        Only applicable to unhandled errors.
     traceback_extra_lines : int, optional
         The number of extra lines to show in tracebacks.
     traceback_suppressed_modules : Iterable[ModuleType], optional
         The modules to suppress in tracebacks (e.g., pandas).
+    logging_basic_config_extra_kwargs : Unpack[LoggingBasicConfigExtraKwargs], optional
+        Extra keyword arguments to pass to [logging.basicConfig()](https://docs.python.org/3/library/logging.html#logging.basicConfig).
 
     Returns
     -------
@@ -79,14 +105,14 @@ def getRichLogger(
         extra_lines=traceback_extra_lines,
         theme="monokai",
         show_locals=traceback_show_locals,
-        locals_hide_dunder=traceback_hide_dunder_locals,
-        locals_hide_sunder=traceback_hide_sunder_locals,
+        locals_hide_dunder=traceback_hide_dunder_sunder_locals,
+        locals_hide_sunder=traceback_hide_dunder_sunder_locals,
         suppress=traceback_suppressed_modules,
     )
 
     # configure the rich handler
     rich_handler: logging.Handler = RichHandler(
-        level=logging.getLevelName(logging_level),
+        level=logging.getLevelName(level),
         omit_repeated_times=False,
         rich_tracebacks=True,
         tracebacks_extra_lines=traceback_extra_lines,
@@ -98,19 +124,20 @@ def getRichLogger(
     )
 
     logging.basicConfig(
-        level=logging.getLevelName(logging_level),
+        level=logging.getLevelName(level),
         format=format,
         handlers=[rich_handler],
+        **logging_basic_config_extra_kwargs,
     )
 
-    return logging.getLogger(logger_name)
+    return logging.getLogger(name)
 
 
 # ~~~~~ example usage ~~~~~
 if __name__ == "__main__":
     logger: logging.Logger = getRichLogger(
-        logging_level="DEBUG",
-        logger_name=__name__,
+        level="DEBUG",
+        name=__name__,
     )
 
     # # Gives rich traceback for unhandled errors
