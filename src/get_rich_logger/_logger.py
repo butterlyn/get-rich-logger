@@ -1,17 +1,15 @@
 from typing import (
     Iterable,
-    TypedDict,
     Literal,
 )
-from typing_extensions import Unpack
+from typing_extensions import (
+    Unpack,
+    TypedDict,
+)
 from types import ModuleType
 import logging
 from rich.logging import RichHandler
 from rich import traceback
-from pydantic import (
-    TypeAdapter,
-    ValidationError,
-)
 
 
 class LoggingBasicConfigExtraKwargs(TypedDict, total=False):
@@ -27,9 +25,6 @@ class LoggingBasicConfigExtraKwargs(TypedDict, total=False):
     force: bool | None
     encoding: str | None
     errors: str | None
-
-
-logging_basic_config_extra_kwargs_adapter = TypeAdapter(LoggingBasicConfigExtraKwargs)
 
 
 def getRichLogger(
@@ -134,17 +129,6 @@ def getRichLogger(
         log_time_format="[%Y-%m-%d %H:%M:%S] ",
     )
 
-    # validate the extra `logging.basicConfig` kwargs
-    try:
-        logging_basic_config_extra_kwargs_adapter.validate_python(
-            logging_basic_config_extra_kwargs,
-            strict=True,
-        )
-    except ValidationError as e:
-        raise TypeError(
-            f"Invalid extra key word arguments provided:\n{e}"
-        ) from e
-
     # configure the logger
     logging.basicConfig(
         level=logging.getLevelName(level),
@@ -162,7 +146,6 @@ if __name__ == "__main__":
     logger: logging.Logger = getRichLogger(
         level="DEBUG",
         name=__name__,
-        # filename=1,  # raises TypeError
     )
 
     # # Gives rich traceback for unhandled errors
