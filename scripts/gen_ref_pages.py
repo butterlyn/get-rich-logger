@@ -1,5 +1,5 @@
 """
-Generates API reference documentation that can be referenced in mkdocs
+Generates API documentation that can be referenced in mkdocs
 mkdocs.yml using:
 
 === "yaml"
@@ -8,10 +8,15 @@ mkdocs.yml using:
     - API Reference: reference/
     ```
 
-Modules can be excluded from API documentation using a leading underscore
-in the file name.
+!!! note
+    Modules can be excluded from API documentation using a leading underscore
+    in the file name.
 
-!!! info "Reference"
+!!! note
+    __all__ in __init__.py specifies what function or classes are
+    included in the API documentation.
+
+!!! info "References"
     Script was derived from [mkdocstrings recipe](https://mkdocstrings.github.io/recipes/)
 """
 from pathlib import Path
