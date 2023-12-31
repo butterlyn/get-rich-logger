@@ -1,18 +1,43 @@
 site_name: Get Rich Logger
 
-site_author: 'Nicholas Butterly'
+repo_url: https://github.com/butterlyn/get-rich-logger
+repo_name: butterlyn/get-rich-logger
 
-theme: 'material'
+theme:
+  name: 'material'
+  features:
+    - navigation.tabs
+    # - toc.integrate
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotate
+    - content.code.select
+    - content.code.copy
+    - content.tooltips
 
 nav:
-  - Getting Started: 'index.md'
+  - Getting Started:
+    - Installation: 'index.md'
+    - Example Usage: 'example.md'
   - API Reference: reference/  # auto-generate api references (https://mkdocstrings.github.io/recipes/)
   # - API Reference:
   #   - get_rich_logger: reference/get_rich_logger/init.md  # generate specific pages
 
 plugins:
   - search
-  - mermaid2
+  # - offline  # makes search other features work offline, but interferes with versioning
+  - mike:
+      alias_type: symlink
+      redirect_template: null
+      deploy_prefix: ''
+      canonical_version: null
+      version_selector: true
+      css_dir: stylesheets
+      javascript_dir: javascripts
   - plantuml:
       puml_url: https://www.plantuml.com/plantuml/
       puml_keyword: plantuml
@@ -22,41 +47,72 @@ plugins:
   - literate-nav:
       nav_file: SUMMARY.md
   - section-index
-  - mkdocstrings
-  - mike
+  - mkdocstrings:
+      default_handler: python
+      handlers:
+        python:
+          options:
+            docstring_style: numpy  # numpy, google, sphinx
+            docstring_section_style: spacy  # table, list, spacy
+            allow_inspection: false
+            show_bases: true
+            show_root_members_full_path: false
+            show_object_full_path: false
+            show_source: true
+            show_root_heading: false
+            show_root_toc_entry: false
+            group_by_category: true
+            show_category_heading: false
+            show_symbol_type_toc: true
+            show_symbol_type_heading: true
 
 markdown_extensions:
   - abbr
+  - def_list
   - pymdownx.highlight:
       anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
   - pymdownx.inlinehilite
   - pymdownx.snippets
-  - admonition
-  - pymdownx.arithmatex:
-      generic: true
-  - footnotes
-  - pymdownx.details
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
-  - pymdownx.mark
+  - admonition
+  - pymdownx.arithmatex:
+      generic: true
+  - footnotes
+  - pymdownx.details
   - attr_list
+  - md_in_html
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.tabbed:
+        alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
-      emoji_generator: !!python/name:materialx.emoji.to_svg
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
 
 extra_javascript:
-  - javascripts/katex.js 
+  - javascripts/katex.js
   - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js  
   - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js
+  - javascripts/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 extra_css:
   - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css
   - stylesheets/extra.css
-  - stylesheets/code_select.css
 
 extra:
   version:
     provider: mike
+  generator: false

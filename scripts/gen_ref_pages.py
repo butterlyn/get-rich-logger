@@ -1,6 +1,18 @@
 """
-Generate the code reference pages and navigation.
-Script was derived from [mkdocstrings recipe](https://mkdocstrings.github.io/recipes/)
+Generates API reference documentation that can be referenced in mkdocs
+mkdocs.yml using:
+
+=== "yaml"
+    ```yaml
+    nav:
+    - API Reference: reference/
+    ```
+
+Modules can be excluded from API documentation using a leading underscore
+in the file name.
+
+!!! info "Reference"
+    Script was derived from [mkdocstrings recipe](https://mkdocstrings.github.io/recipes/)
 """
 from pathlib import Path
 import mkdocs_gen_files
@@ -17,11 +29,13 @@ for path in sorted(src.rglob("*.py")):
 
     parts = tuple(module_path_without_suffix.parts)
 
-    if parts[-1] == "__init__":  # make __init__.py files the package index
+    # rename __init__.py files to {{ package name }}.md
+    if parts[-1] == "__init__":
         parts = parts[:-1]
         doc_path = doc_path.parent.with_suffix(".md")
         full_doc_path = full_doc_path.parent.with_suffix(".md")
-    elif parts[-1] == "__main__":  # skip __main__.py files
+    # skip __main__.py files
+    elif parts[-1] == "__main__":
         continue
     # filter out private modules (i.e., those starting with _)
     elif parts[-1].startswith("_"):
