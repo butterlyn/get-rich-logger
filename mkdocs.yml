@@ -6,10 +6,11 @@ repo_name: butterlyn/get-rich-logger
 theme:
   name: 'material'
   features:
-    - navigation.tabs
-    - toc.integrate
-    - navigation.sections
+    # - toc.integrate
+    # - navigation.sections
+    - navigation.indexes
     - navigation.top
+    - navigation.tabs
     - navigation.footer
     - search.suggest
     - search.highlight
@@ -20,9 +21,10 @@ theme:
     - content.tooltips
 
 nav:
-  - Getting Started:
-    - Installation: 'index.md'
-    - Example Usage: 'example.md'
+  - Home:
+    - Welcome: 'index.md'
+    - User Guide: 'sections/User Guide/'
+    - Development: sections/Development/
   - API Reference: reference/  # auto-generate api references (https://mkdocstrings.github.io/recipes/)
   # - API Reference:
   #   - get_rich_logger: reference/get_rich_logger/init.md  # generate specific pages
@@ -46,7 +48,6 @@ plugins:
       - scripts/gen_ref_pages.py
   - literate-nav:
       nav_file: SUMMARY.md
-  - section-index
   - mkdocstrings:
       default_handler: python
       handlers:
@@ -67,6 +68,9 @@ plugins:
             show_symbol_type_heading: true
 
 markdown_extensions:
+  - toc:
+      permalink: true
+      permalink_title: ""
   - abbr
   - def_list
   - pymdownx.highlight:
