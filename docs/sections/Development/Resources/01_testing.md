@@ -1,10 +1,22 @@
-# Nox and nox-poetry
+# Testing
 
-Development commands are consolidated using the [nox-poetry](https://nox-poetry.readthedocs.io/en/stable/index.html) package.
+Testing commands are consolidated using the [nox-poetry](https://nox-poetry.readthedocs.io/en/stable/index.html) package.
 
 Nox manages virtual environments for different versions of python and consolidates development activities (e.g., testing, static type-checking) into a cli interface, while nox-poetry ensures that nox sessions have access to the same dependencies as the project's poetry.lock file.
 
-## Key nox-poetry session methods
+## Using nox in CLI
+
+Nox CLI commands can be viewed by running the following command from the project root:
+
+```
+poetry run nox
+```
+
+## Updating nox
+
+Nox commands can be updated in the noxfile.py file located in the project root.
+
+### Key nox-poetry session methods
 
 Make all poetry.lock dependencies (including dev) available to nox sessions:
 

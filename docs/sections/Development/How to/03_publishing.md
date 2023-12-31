@@ -1,4 +1,4 @@
-# Publishing
+# Publish new version
 
 ## Publishing checklist
 

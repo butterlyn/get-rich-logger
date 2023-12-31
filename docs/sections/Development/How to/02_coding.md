@@ -1,4 +1,4 @@
-# Updating code
+# Update source code
 
 1. Serve documentation locally
     ```
