@@ -16,29 +16,27 @@ def getRichLogger(
     traceback_suppressed_modules: Iterable[ModuleType] = (),
 ) -> logging.Logger:
     """
-    Substitute for logging.getLogger(), but pre-configured as rich logger
-    with rich traceback.
+    Substitute for [logging.getLogger()](https://docs.python.org/3/library/logging.html), but pre-configured as rich
+    logger with rich traceback.
 
     Parameters
     ----------
     logging_level : str or int, optional
-        The logging level to use. Defaults to 'NOTSET'.
+        The logging level to use.
     logger_name : str, optional
-        The name of the logger. Defaults to None.
+        The name of the logger.
     format : str, optional
         The format string to use for the rich logger.
-        Defaults to '%(message)s'.
     traceback_show_locals : bool, optional
-        Whether to show local variables in tracebacks. Defaults to False.
+        Whether to show local variables in tracebacks.
     traceback_hide_dunder_locals : bool, optional
-        Whether to hide dunder variables in tracebacks. Defaults to True.
+        Whether to hide dunder variables in tracebacks.
     traceback_hide_sunder_locals : bool, optional
-        Whether to hide sunder variables in tracebacks. Defaults to True.
+        Whether to hide sunder variables in tracebacks.
     traceback_extra_lines : int, optional
-        The number of extra lines to show in tracebacks. Defaults to 10.
+        The number of extra lines to show in tracebacks.
     traceback_suppressed_modules : Iterable[ModuleType], optional
         The modules to suppress in tracebacks (e.g., pandas).
-        Defaults to ().
 
     Returns
     -------
@@ -51,21 +49,29 @@ def getRichLogger(
         If additional_handlers is not a logging.Handler,
         Iterable[logging.Handler], or None.
 
-    Example
-    -------
-    ``` pycon
-    >>> import logging
-    >>> from get_rich_logger import getRichLogger
-    >>> getRichLogger(
+    Examples
+    --------
+    === "Python"
+        ``` python linenums="1"
+        import logging
+        from get_rich_logger import getRichLogger
+
+        getRichLogger(
             logging_level="DEBUG",
             logger_name=__name__,
             traceback_show_locals=True,
             traceback_extra_lines=10,
             traceback_suppressed_modules=(),
         )
-    >>> logging.debug("This is a rich debug message!")
-    >>> 1/0
-    ```
+
+        logging.debug("This is a rich debug message!")  # (1)
+
+        1/0  # (2)
+        ```
+
+        1.  Logs will be colored and formatted with rich.
+        2.  Unhandled errors will have rich traceback.
+
     """
 
     # install rich traceback for unhandled exceptions
