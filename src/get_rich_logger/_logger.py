@@ -50,7 +50,7 @@ def getRichLogger(
 
     Parameters
     ----------
-    level : _Level, optional
+    level : Literal["NOTSET","DEBUG","INFO","WARNING","ERROR","CRITICAL"] | int, optional
         The logging level to use.
         Valid values include "DEBUG", 10, "INFO", 20, "WARNING", 30,
         "ERROR", 40, "CRITICAL", 50.
