@@ -1,16 +1,17 @@
 from typing import (
     Iterable,
     TypedDict,
+    Literal,
 )
 from typing_extensions import Unpack
 from types import ModuleType
 import logging
-from logging.config import (  # type: ignore[attr-defined]
-    _Level,
-    _FormatStyle,
-)
 from rich.logging import RichHandler
 from rich import traceback
+from pydantic import (
+    TypeAdapter,
+    ValidationError,
+)
 
 
 class LoggingBasicConfigExtraKwargs(TypedDict, total=False):
@@ -22,14 +23,24 @@ class LoggingBasicConfigExtraKwargs(TypedDict, total=False):
     filename: str | None
     filemode: str
     datefmt: str | None
-    style: _FormatStyle
+    style: Literal['%', '{', '$']
     force: bool | None
     encoding: str | None
     errors: str | None
 
 
+logging_basic_config_extra_kwargs_adapter = TypeAdapter(LoggingBasicConfigExtraKwargs)
+
+
 def getRichLogger(
-    level: _Level = "NOTSET",
+    level: Literal[
+        "NOTSET",
+        "DEBUG",
+        "INFO",
+        "WARNING",
+        "ERROR",
+        "CRITICAL",
+    ] | int = "NOTSET",
     name: str | None = None,
     format: str = "%(message)s",
     traceback_show_locals: bool = False,
@@ -67,7 +78,7 @@ def getRichLogger(
     Returns
     -------
     logging.Logger
-        The configured logger.
+        The configured rich logger.
 
     Raises
     ------
@@ -123,6 +134,18 @@ def getRichLogger(
         log_time_format="[%Y-%m-%d %H:%M:%S] ",
     )
 
+    # validate the extra `logging.basicConfig` kwargs
+    try:
+        logging_basic_config_extra_kwargs_adapter.validate_python(
+            logging_basic_config_extra_kwargs,
+            strict=True,
+        )
+    except ValidationError as e:
+        raise TypeError(
+            f"Invalid extra key word arguments provided:\n{e}"
+        ) from e
+
+    # configure the logger
     logging.basicConfig(
         level=logging.getLevelName(level),
         format=format,
@@ -130,6 +153,7 @@ def getRichLogger(
         **logging_basic_config_extra_kwargs,
     )
 
+    # return the rich logger
     return logging.getLogger(name)
 
 
@@ -138,6 +162,7 @@ if __name__ == "__main__":
     logger: logging.Logger = getRichLogger(
         level="DEBUG",
         name=__name__,
+        # filename=1,  # raises TypeError
     )
 
     # # Gives rich traceback for unhandled errors
