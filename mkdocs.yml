@@ -5,9 +5,10 @@ repo_name: butterlyn/get-rich-logger
 
 nav:
   - Home:
-    - Welcome: index.md  # odd formatting to make this section the landing page
-    - '': sections/Home/
-  - Development: sections/Development/
+    - Welcome: index.md
+    - '': sections/Home/  # must be used with theme feature 'navigation.sections'
+  - Development: 
+    - '': sections/Development/
   - API Reference: reference/  # auto-generate api references (https://mkdocstrings.github.io/recipes/)
   # - API Reference:
   #   - get_rich_logger: reference/get_rich_logger/init.md  # generate specific pages
@@ -31,7 +32,8 @@ theme:
 
 plugins:
   - search
-  # - offline  # makes search other features work offline, but interferes with versioning
+  # when building for offline usage, make sure to disable the following configuration settings: instant loading, site analytics, git repository, versioning and comment systems
+  # - offline
   - mike:
       alias_type: symlink
       redirect_template: null
@@ -54,7 +56,7 @@ plugins:
         python:
           options:
             docstring_style: numpy  # numpy, google, sphinx
-            docstring_section_style: spacy  # table, list, spacy
+            docstring_section_style: table  # table, list, spacy
             allow_inspection: false
             show_bases: true
             show_root_members_full_path: false
