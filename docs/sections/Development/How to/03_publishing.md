@@ -9,6 +9,9 @@
     ```
     git commit -am "<commit message>"
     ```
+    ```
+    git push
+    ```
 2. Package validation
     1. Check for dependency updates
     ```
