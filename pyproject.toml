@@ -21,6 +21,12 @@ mkdocs-section-index = "^0.3.8"
 mkdocstrings-python = "^1.7.5"
 mike = "^2.0.0"
 
+[tool.mypy]
+python_version = "3.10"
+files = ["src/*/*.py"]
+ignore_missing_imports = true
+disable_error_code = []
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
