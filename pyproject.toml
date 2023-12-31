@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "get-rich-logger"
-version = "0.3.1"
+version = "0.3.2"
 description = ""
 authors = ["Nicholas Butterly <butterlyn888@gmail.com>"]
 readme = "README.md"
