@@ -17,7 +17,8 @@ mkdocs.yml using:
     included in the API documentation.
 
 !!! info "References"
-    Script was derived from [mkdocstrings recipe](https://mkdocstrings.github.io/recipes/)
+    Script was derived from
+    [mkdocstrings recipe](https://mkdocstrings.github.io/recipes/)
 """
 from pathlib import Path
 
@@ -51,9 +52,9 @@ for path in sorted(src.rglob("*.py")):
 
     # Define the content of the page
     with mkdocs_gen_files.open(full_doc_path, "w") as fd:
-        ident = ".".join(parts)
+        IDENT = ".".join(parts)
 
-        fd.write(f"::: {ident}")
+        fd.write(f"::: {IDENT}")
 
     mkdocs_gen_files.set_edit_path(full_doc_path, path)
 
