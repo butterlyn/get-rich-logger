@@ -36,7 +36,8 @@ def get_rich_logger(
     **logging_basic_config_extra_kwargs: Unpack[LoggingBasicConfigExtraKwargs],
 ) -> logging.Logger:
     """
-    Substitute for [logging.getLogger()](https://docs.python.org/3/library/logging.html),
+    Substitute for
+    [logging.getLogger()](https://docs.python.org/3/library/logging.html),
     but pre-configured as rich logger with rich traceback.
 
     Parameters
@@ -78,9 +79,9 @@ def get_rich_logger(
     === "Python"
         ``` python linenums="1"
         import logging
-        from get_rich_logger import getRichLogger
+        from get_rich_logger import get_rich_logger
 
-        logger: logging.Logger = getRichLogger(
+        logger: logging.Logger = get_rich_logger(
             level="DEBUG",
             name=__name__,
             traceback_show_locals=True,
