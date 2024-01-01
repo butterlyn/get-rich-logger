@@ -1,7 +1,7 @@
 import nox
 from nox_poetry import (
-    session,
     Session,
+    session,
 )
 
 # an empty list will display all sessions for command `nox`

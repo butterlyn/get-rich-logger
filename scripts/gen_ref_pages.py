@@ -20,6 +20,7 @@ mkdocs.yml using:
     Script was derived from [mkdocstrings recipe](https://mkdocstrings.github.io/recipes/)
 """
 from pathlib import Path
+
 import mkdocs_gen_files
 
 nav = mkdocs_gen_files.Nav()

@@ -1,15 +1,11 @@
-from typing import (
-    Iterable,
-    Literal,
-)
-from typing_extensions import (
-    Unpack,
-    TypedDict,
-)
-from types import ModuleType
+"""Module containing rich logger."""
 import logging
-from rich.logging import RichHandler
+from types import ModuleType
+from typing import Iterable, Literal
+
 from rich import traceback
+from rich.logging import RichHandler
+from typing_extensions import TypedDict, Unpack
 
 
 class LoggingBasicConfigExtraKwargs(TypedDict, total=False):
@@ -28,11 +24,11 @@ class LoggingBasicConfigExtraKwargs(TypedDict, total=False):
     errors: str | None
 
 
-def getRichLogger(
+def get_rich_logger(
     level: Literal["NOTSET", "DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
     | int = "NOTSET",
     name: str | None = None,
-    format: str = "%(message)s",
+    log_format: str = "%(message)s",  # Renamed the 'format' parameter
     traceback_show_locals: bool = False,
     traceback_hide_dunder_sunder_locals: bool = True,
     traceback_extra_lines: int = 10,
@@ -63,7 +59,8 @@ def getRichLogger(
     traceback_suppressed_modules : Iterable[ModuleType], optional
         The modules to suppress in tracebacks (e.g., pandas).
     logging_basic_config_extra_kwargs : Unpack[LoggingBasicConfigExtraKwargs], optional
-        Extra keyword arguments to pass to [logging.basicConfig()](https://docs.python.org/3/library/logging.html#logging.basicConfig).
+        Extra keyword arguments to pass to
+        [logging.basicConfig()](https://docs.python.org/3/library/logging.html#logging.basicConfig).
 
     Returns
     -------
@@ -127,7 +124,7 @@ def getRichLogger(
     # configure the logger
     logging.basicConfig(
         level=logging.getLevelName(level),
-        format=format,
+        format=log_format,
         handlers=[rich_handler],
         **logging_basic_config_extra_kwargs,
     )
