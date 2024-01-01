@@ -18,24 +18,19 @@ class LoggingBasicConfigExtraKwargs(TypedDict, total=False):
     [logging.getLogger()](https://docs.python.org/3/library/logging.html)
     excluding `level`, `format`, and `handlers`, and `stream`.
     """
+
     filename: str | None
     filemode: str
     datefmt: str | None
-    style: Literal['%', '{', '$']
+    style: Literal["%", "{", "$"]
     force: bool | None
     encoding: str | None
     errors: str | None
 
 
 def getRichLogger(
-    level: Literal[
-        "NOTSET",
-        "DEBUG",
-        "INFO",
-        "WARNING",
-        "ERROR",
-        "CRITICAL",
-    ] | int = "NOTSET",
+    level: Literal["NOTSET", "DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
+    | int = "NOTSET",
     name: str | None = None,
     format: str = "%(message)s",
     traceback_show_locals: bool = False,
@@ -98,7 +93,7 @@ def getRichLogger(
 
         logging.debug("This is a rich debug message!")  # (1)
 
-        1/0  # (2)
+        1 / 0  # (2)
         ```
 
         1.  Logs will be colored and formatted with rich.
