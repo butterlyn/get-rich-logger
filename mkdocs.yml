@@ -4,7 +4,7 @@ repo_url: https://github.com/butterlyn/get-rich-logger
 repo_name: butterlyn/get-rich-logger
 
 nav:
-  - Home: sections/Home/  # must be used with theme feature 'navigation.sections'
+  - User Guide: sections/User Guide/  # must be used with theme feature 'navigation.sections'
   - Development: sections/Development/
   - API Reference: reference/  # auto-generate api references (https://mkdocstrings.github.io/recipes/)
 
@@ -31,7 +31,7 @@ plugins:
   - offline
   - redirects:
       redirect_maps:
-        'index.md': 'sections/Home/index.md'
+        'index.md': 'sections/User Guide/index.md'
   - mike:
       alias_type: symlink
       redirect_template: null
