@@ -44,8 +44,6 @@ def get_rich_logger(
     ----------
     level : Literal["NOTSET","DEBUG","INFO","WARNING","ERROR","CRITICAL"] | Literal[0, 10, 20, 30, 40, 50], optional
         The logging level to use.
-        Valid values include "DEBUG", 10, "INFO", 20, "WARNING", 30,
-        "ERROR", 40, "CRITICAL", 50.
     name : str, optional
         The name of the logger. Recommended to use `__name__`.
     log_format : str, optional
