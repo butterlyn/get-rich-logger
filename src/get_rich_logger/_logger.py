@@ -48,7 +48,7 @@ def get_rich_logger(
         "ERROR", 40, "CRITICAL", 50.
     name : str, optional
         The name of the logger. Recommended to use `__name__`.
-    format : str, optional
+    log_format : str, optional
         The format string to use for the rich logger.
     traceback_show_locals : bool, optional
         Whether to show local variables in tracebacks.
