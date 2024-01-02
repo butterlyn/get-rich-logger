@@ -569,13 +569,13 @@ files = [
 
 [[package]]
 name = "mkdocs-puml"
-version = "1.2.3"
+version = "1.2.4"
 description = "Package that brings PlantUML to MkDocs"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "mkdocs_puml-1.2.3-py3-none-any.whl", hash = "sha256:091922883188fa10d689a3b82d199e6beecc11133cd7a0b727e0cfd4bf50b21f"},
-    {file = "mkdocs_puml-1.2.3.tar.gz", hash = "sha256:c4f30f56f68db77b66ee783ad4a9dc027ac1bacc58e5f340d10bf9abfe14c042"},
+    {file = "mkdocs_puml-1.2.4-py3-none-any.whl", hash = "sha256:0fceee31a9dce5363b71a1fabe563a70da97e5516bb54d0cc6c91777da78dc1b"},
+    {file = "mkdocs_puml-1.2.4.tar.gz", hash = "sha256:d0ae4d69cdbc5ec97ab7411387c1b87a5f8d0a9687e62f2131ef303b175fced9"},
 ]
 
 [package.dependencies]
