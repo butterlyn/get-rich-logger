@@ -26,7 +26,7 @@ class LoggingBasicConfigExtraKwargs(TypedDict, total=False):
 
 def get_rich_logger(
     level: Literal["NOTSET", "DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
-    | int = "NOTSET",
+    | Literal[0, 10, 20, 30, 40, 50] = "NOTSET",
     name: str | None = None,
     log_format: str = "%(message)s",  # Renamed the 'format' parameter
     traceback_show_locals: bool = False,
@@ -42,7 +42,7 @@ def get_rich_logger(
 
     Parameters
     ----------
-    level : Literal["NOTSET","DEBUG","INFO","WARNING","ERROR","CRITICAL"] | int, optional
+    level : Literal["NOTSET","DEBUG","INFO","WARNING","ERROR","CRITICAL"] | Literal[0, 10, 20, 30, 40, 50], optional
         The logging level to use.
         Valid values include "DEBUG", 10, "INFO", 20, "WARNING", 30,
         "ERROR", 40, "CRITICAL", 50.
